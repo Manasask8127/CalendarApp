@@ -31,11 +31,19 @@ class CalendarMainFragment : Fragment() {
         val binding= DataBindingUtil.inflate<FragmentCalendarMainBinding>(inflater,R.layout.fragment_calendar_main,container,false)
 
         binding.apply {
+            //Calendar view
             calendarView.isDynamicHeightEnabled=true
             calendarView.selectedDate= CalendarDay.today()
 
-
+            //current month and year
             tvDatePickerText.text=Utils.getTitleText(CalendarDay.today())
+
+            //sets to current date
+            ivCurrentDate.setOnClickListener {
+                calendarView.currentDate = CalendarDay.today()
+                calendarView.selectedDate = CalendarDay.today()
+                tvDatePickerText.text = Utils.getTitleText(CalendarDay.today())
+            }
         }
 
         return binding.root
