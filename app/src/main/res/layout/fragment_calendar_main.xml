@@ -64,11 +64,6 @@
                         android:textColor="@color/main_text_color"
                         android:textSize="20sp" />
 
-                    <ImageView
-                        android:id="@+id/iv_date_picker_arrow"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_arrow_down" />
 
                 </LinearLayout>
 
@@ -110,7 +105,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/main_color"
-                android:visibility="gone"
                 android:elevation="1dp"
                 app:mcv_dateTextAppearance="@style/CalendarDateAppearance"
                 app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
