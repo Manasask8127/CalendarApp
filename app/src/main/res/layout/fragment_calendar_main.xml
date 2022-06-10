@@ -45,27 +45,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:tint="@color/secondary_text_color" />
 
-                <LinearLayout
-                    android:id="@+id/ll_date_picker"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:foreground="?selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="4dp"
-                    app:layout_constraintEnd_toStartOf="@id/iv_search"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toEndOf="@id/iv_menu">
-
-                    <TextView
-                        android:id="@+id/tv_date_picker_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_regular"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/iv_search"
@@ -110,6 +89,26 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
                 app:mcv_firstDayOfWeek="monday"
                 app:mcv_showOtherDates="defaults" />
+            <!--            <DatePicker-->
+            <!--            android:id="@+id/calendar_view"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:background="@color/main_color"-->
+            <!--            android:elevation="1dp"-->
+            <!--            app:layout_constraintTop_toBottomOf="@id/cl_toolbar"-->
+            <!--             />-->
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_add" />
 
             <!--        <androidx.recyclerview.widget.RecyclerView-->
             <!--            android:id="@+id/rv_calendar"-->
