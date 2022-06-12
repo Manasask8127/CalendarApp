@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/calendar_date_color.xml" value="0.1814814814814815" />
+        <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/ic_crop_square.xml" value="0.1109375" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/layout/event_item.xml" value="0.25" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/layout/fragment_calendar_add_event.xml" value="0.20416666666666666" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/layout/fragment_calendar_main.xml" value="0.19382022471910113" />
       </map>

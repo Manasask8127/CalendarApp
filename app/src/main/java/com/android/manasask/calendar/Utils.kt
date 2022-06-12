@@ -6,9 +6,8 @@ import java.util.*
 
 object Utils {
     fun getTitleText(cDay: CalendarDay): String {
-        val fullSdf = SimpleDateFormat("MMM, yyyy")
-
-        return upperFirst(fullSdf.format(getDate(cDay)))
+        val fullSdf = SimpleDateFormat("MM/dd/yyyy")
+        return fullSdf.format(getDate(cDay))
     }
 
     private fun getDate(cDay: CalendarDay): Date {

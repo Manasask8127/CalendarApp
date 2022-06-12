@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.android.manasask.calendar.Utils.getTitleText
 import com.android.manasask.calendar.databinding.FragmentCalendarMainBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import timber.log.Timber
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +28,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class CalendarMainFragment : Fragment() {
 
+    private val eventAdapter = EventAdapter()
+    private lateinit var calendarMainViewModel: CalendarMainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +38,16 @@ class CalendarMainFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding= DataBindingUtil.inflate<FragmentCalendarMainBinding>(inflater,R.layout.fragment_calendar_main,container,false)
 
+        binding.rvCalendar.adapter = eventAdapter
+        calendarMainViewModel = ViewModelProvider(requireActivity())[CalendarMainViewModel::class.java]
+
+
+
         binding.apply {
             //Calendar view
            // calendarView.isDynamicHeightEnabled=true
-            calendarView.selectedDate= CalendarDay.today()
+            calendarView.addDecorator(CurrentDateDecorator(requireContext()))
+           // calendarView.selectedDate= CalendarDay.today()
 
 
 
@@ -51,16 +63,28 @@ class CalendarMainFragment : Fragment() {
             }
 
             calendarView.setOnMonthChangedListener{_,date->
-
-
+               // calendarView.selectedDate = date
+                calendarMainViewModel.setEventDate(getTitleText(date))
             }
 
             calendarView.setOnDateChangedListener { widget, date, selected ->
+                Timber.d("on date change ${date}")
+                Toast.makeText(requireContext(),"date is ${date}",Toast.LENGTH_SHORT).show()
+                calendarMainViewModel.setEventDate(getTitleText(date))
 
             }
         }
 
+
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        calendarMainViewModel.eventList.observe(viewLifecycleOwner) { eventsList ->
+            eventAdapter.submitList(eventsList)
+        }
     }
 
 
