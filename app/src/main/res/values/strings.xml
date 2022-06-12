@@ -11,4 +11,7 @@
     <string name="tv_month">Month</string>
     <string name="tv_settings">Settings</string>
     <string name="tv_help_and_feedback">Help &amp; feedback</string>
+    <string name="error_empty_title">Please enter title</string>
+    <string name="error_empty_startTime">"please select start time "</string>
+    <string name="error_empty_startDate">please select start date</string>
 </resources>

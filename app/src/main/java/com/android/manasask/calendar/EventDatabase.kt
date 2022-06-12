@@ -6,33 +6,27 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Event::class],version = 1,exportSchema = false)
-abstract class EventDatabase: RoomDatabase(){
-    abstract val eventDatabaseDao : EventDatabaseDao
+abstract class EventDatabase: RoomDatabase() {
+    abstract val eventDatabaseDao: EventDatabaseDao
+}
+@Volatile
+private lateinit var database: EventDatabase
 
-    companion object
-    {
-        @Volatile
-        private var INSTANCE : EventDatabase?= null
-
-        fun getInstance(context : Context) : EventDatabase
+        fun getDatabase(context : Context) : EventDatabase
         {
-            synchronized(this)
+            synchronized(EventDatabase::class.java)
             {
-                var instance= INSTANCE
-
-                if(instance==null)
+                if(!::database.isInitialized)
                 {
-                    instance= Room.databaseBuilder(
-                        context.applicationContext  ,
-                        EventDatabase::class.java,
-                        "event_history_database")
+                    database= Room.databaseBuilder(
+                        context  ,
+                        EventDatabase::class.java,"event_table")
                         .fallbackToDestructiveMigration()
                         .build()
-                    INSTANCE=instance
+
                 }
-                return instance
+                return database
             }
         }
-    }
 
-}
+

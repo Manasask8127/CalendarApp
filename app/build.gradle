@@ -62,7 +62,7 @@ dependencies {
 
     //room
     implementation("androidx.room:room-runtime:2.4.2")
-    annotationProcessor("androidx.room:room-compiler:2.4.2")
+    kapt("androidx.room:room-compiler:2.4.2")
 
     //lifecycle and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -76,5 +76,10 @@ dependencies {
 
     // material calendar
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+
+    //kotlin coroutines
+    // Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 
 }

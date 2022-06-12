@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Event(
 
     @PrimaryKey(autoGenerate = true)
-    var eventId : Long = 0L,
+    var eventId : Int=0,
 
     @ColumnInfo(name = "event_title")
     var eventTitle : String,
@@ -17,16 +17,16 @@ data class Event(
     var eventLocation : String,
 
     @ColumnInfo(name = "start_date")
-    var  eventStartDate: Int ,
+    var  eventStartDate: String ,
 
     @ColumnInfo(name = "start_time")
-    var  eventStartTime: Int ,
+    var  eventStartTime: String ,
 
     @ColumnInfo(name = "end_date")
-    var  eventEndDate: Int ,
+    var  eventEndDate: String ,
 
     @ColumnInfo(name = "end_time")
-    var  eventEndTime: Int ,
+    var  eventEndTime: String ,
 
     @ColumnInfo(name = "event_description")
     var  eventDesscription: String
