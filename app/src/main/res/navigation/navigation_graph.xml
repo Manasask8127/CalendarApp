@@ -17,6 +17,10 @@
     <fragment
         android:id="@+id/calendarAddEventFragment"
         android:name="com.android.manasask.calendar.CalendarAddEventFragment"
-        android:label="CalendarAddEventFragment"
-        tools:layout="@layout/fragment_calendar_add_event"/>
+        android:label="Add Event"
+        tools:layout="@layout/fragment_calendar_add_event">
+        <action
+            android:id="@+id/action_calendarAddEventFragment_to_calendarMainFragment"
+            app:destination="@id/calendarMainFragment" />
+    </fragment>
 </navigation>

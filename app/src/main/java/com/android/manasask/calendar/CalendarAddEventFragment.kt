@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.android.manasask.calendar.databinding.FragmentCalendarAddEventBinding
 import com.android.manasask.calendar.databinding.FragmentCalendarMainBinding
 import timber.log.Timber
@@ -52,6 +57,12 @@ class CalendarAddEventFragment : Fragment() {
             this@CalendarAddEventFragment,
             calendarAddItemViewModelProvider
         )[CalendarAddEventViewModel::class.java]
+
+        // Creating toolbar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.topAppBar)
+       // binding.topAppBar.title = getString(R.string.title_add_event)
+        val appBarConfiguration = AppBarConfiguration(findNavController().graph)
+        binding.topAppBar.setupWithNavController(findNavController(), appBarConfiguration)
 
         //Start date
         val startDateListener=object :DatePickerDialog.OnDateSetListener{
@@ -140,6 +151,7 @@ class CalendarAddEventFragment : Fragment() {
             }
 
         }
+        this.view?.setOnKeyListener(onBackClick())
 
 
         return binding.root
@@ -189,6 +201,20 @@ class CalendarAddEventFragment : Fragment() {
             }
             else
                 true
+        }
+    }
+
+    // navigates to MainFragment on back click press
+    private fun onBackClick(): View.OnKeyListener {
+        return object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if (event?.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    findNavController().navigate(R.id.action_calendarAddEventFragment_to_calendarMainFragment)
+                    return true;
+                }
+                return false;
+            }
+
         }
     }
 
