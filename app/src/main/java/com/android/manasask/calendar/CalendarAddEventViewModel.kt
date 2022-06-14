@@ -4,7 +4,9 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+//import java.sql.Date
 import java.sql.SQLException
+import java.util.*
 
 class CalendarAddEventViewModel(private val database: EventDatabase):ViewModel() {
 
@@ -16,8 +18,8 @@ class CalendarAddEventViewModel(private val database: EventDatabase):ViewModel()
      * insert the [Event] which created based on user selection
      * @exception SQLException logs any insertion to database fails
      */
-    fun insertItem(tile: String, location: String, startdate: String,startTime:String,
-    endDate:String,endTime:String,description:String) {
+    fun insertItem(tile: String, location: String, startdate: Date,startTime:String,
+    endDate:Date,endTime:String,description:String) {
         val databaseEventItem = Event(
              eventTitle= tile,
             eventLocation = location,

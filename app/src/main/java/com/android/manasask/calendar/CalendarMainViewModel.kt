@@ -1,6 +1,7 @@
 package com.android.manasask.calendar
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,19 +24,20 @@ class CalendarMainViewModel(private val applicationContext: Application) :
 
     init {
         Timber.d("initializing main viewmodel")
-      // loadEventDatabase("06/12/2022")
+      loadEventDatabase(Date())
     }
 
-    fun setEventDate(date:String)
+    fun setEventDate(date:Date)
     {
         loadEventDatabase(date)
     }
 
-    private fun loadEventDatabase(date:String) {
+    private fun loadEventDatabase(date:Date) {
         viewModelScope.launch {
             launch(Dispatchers.IO) {
                 database.eventDatabaseDao.getEvents(date)
                     .collect {
+                        Log.d("Manasa list",it.toString())
                         Timber.d("eventList ${it}")
                         _eventList.postValue(it)
                     }

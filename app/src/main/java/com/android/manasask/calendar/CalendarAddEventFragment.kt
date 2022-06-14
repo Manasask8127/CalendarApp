@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,6 +42,10 @@ class CalendarAddEventFragment : Fragment() {
     private lateinit var binding:FragmentCalendarAddEventBinding
      var calendar= Calendar.getInstance()
     val pickerDate=Calendar.getInstance()
+
+    private lateinit var sDate: Date
+    private lateinit var eDate: Date
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,6 +75,8 @@ class CalendarAddEventFragment : Fragment() {
                 calendar.set(p1,p2,p3)
                 binding.startDateEdit.text=SimpleDateFormat("MM/dd/yyyy",Locale.US).format(calendar.time)
                 binding.endDateEdit.text=SimpleDateFormat("MM/dd/yyyy",Locale.US).format(calendar.time)
+                sDate=calendar.time
+                //eDate=calendar.time
             }
         }
 
@@ -83,8 +90,15 @@ class CalendarAddEventFragment : Fragment() {
         val endDateListener=object :DatePickerDialog.OnDateSetListener{
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
                 calendar.set(p1,p2,p3)
+
                 //binding.startDateEdit.text=SimpleDateFormat("MM/dd/yyyy",Locale.US).format(calendar.time)
+                //Toast.makeText(requireContext(),"calendar time ${calendar.time}",Toast.LENGTH_SHORT).show()
+                Log.d("Manasa","endDate: ${calendar.time.time}")
                 binding.endDateEdit.text=SimpleDateFormat("MM/dd/yyyy",Locale.US).format(calendar.time)
+                calendar.add(Calendar.DATE,1)
+                eDate=calendar.time
+               // Log.d("Manasa")
+                //1655528975439
             }
         }
 
@@ -130,9 +144,11 @@ class CalendarAddEventFragment : Fragment() {
             {
                 val title=binding.titleEdit.text.toString().trim()
                 val location=binding.placeEdit.text.toString().trim()
-                val startDate=binding.startDateEdit.text.toString().trim()
+                val startDate=sDate
+                    //java.sql.Date.valueOf(binding.startDateEdit.text.toString().trim())
                 val startTime=binding.startTimeEdit.text.toString().trim()
-                val endDate=binding.endDateEdit.text.toString().trim()
+                val endDate=eDate
+                    //java.sql.Date.valueOf(binding.endDateEdit.text.toString().trim())
                 val endTime=binding.endTimeEdit.text.toString().trim()
                 val description=binding.detailEdit.text.toString().trim()
                 Timber.d("title: $title, location:$location, startDate:$startDate,startTime:$startTime" +

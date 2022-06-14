@@ -2,6 +2,7 @@ package com.android.manasask.calendar
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.android.manasask.calendar.Utils.getDate
 import com.android.manasask.calendar.Utils.getTitleText
 import com.android.manasask.calendar.databinding.FragmentCalendarMainBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -51,6 +53,7 @@ class CalendarMainFragment : Fragment() {
 
 
 
+
             //sets to current date
             ivCurrentDate.setOnClickListener {
                 calendarView.currentDate = CalendarDay.today()
@@ -63,14 +66,15 @@ class CalendarMainFragment : Fragment() {
             }
 
             calendarView.setOnMonthChangedListener{_,date->
-               // calendarView.selectedDate = date
-                calendarMainViewModel.setEventDate(getTitleText(date))
+               //calendarView.selectedDate = date
+                //date.
+                calendarMainViewModel.setEventDate(getDate(date))
             }
 
-            calendarView.setOnDateChangedListener { widget, date, selected ->
+            calendarView.setOnDateChangedListener { _, date, _->
                 Timber.d("on date change ${date}")
-                Toast.makeText(requireContext(),"date is ${date}",Toast.LENGTH_SHORT).show()
-                calendarMainViewModel.setEventDate(getTitleText(date))
+               // Toast.makeText(requireContext(),"date is ${date}",Toast.LENGTH_SHORT).show()
+                calendarMainViewModel.setEventDate(getDate(date))
 
             }
         }
@@ -83,6 +87,7 @@ class CalendarMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         calendarMainViewModel.eventList.observe(viewLifecycleOwner) { eventsList ->
+            Log.d("Manasa ","fragment List ${eventsList}")
             eventAdapter.submitList(eventsList)
         }
     }

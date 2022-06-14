@@ -3,6 +3,7 @@ package com.android.manasask.calendar
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "event_table")
 data class Event(
@@ -17,13 +18,13 @@ data class Event(
     var eventLocation : String,
 
     @ColumnInfo(name = "start_date")
-    var  eventStartDate: String ,
+    var  eventStartDate: Date ,
 
     @ColumnInfo(name = "start_time")
     var  eventStartTime: String ,
 
     @ColumnInfo(name = "end_date")
-    var  eventEndDate: String ,
+    var  eventEndDate: Date ,
 
     @ColumnInfo(name = "end_time")
     var  eventEndTime: String ,

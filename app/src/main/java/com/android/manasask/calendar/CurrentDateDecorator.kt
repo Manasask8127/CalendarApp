@@ -24,14 +24,14 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator
 
 
 class CurrentDateDecorator(context: Context) : DayViewDecorator {
-    private val highlightDrawable: Drawable
+   // private val highlightDrawable: Drawable
     private val context: Context
     override fun shouldDecorate(day: CalendarDay): Boolean {
         return day == CalendarDay.today()
     }
 
     override fun decorate(view: DayViewFacade) {
-        view.setBackgroundDrawable(highlightDrawable)
+        //view.setBackgroundDrawable(highlightDrawable)
         view.addSpan(ForegroundColorSpan(Color.WHITE))
         view.addSpan(StyleSpan(Typeface.BOLD))
         view.addSpan(RelativeSizeSpan(1.5f))
@@ -39,6 +39,6 @@ class CurrentDateDecorator(context: Context) : DayViewDecorator {
 
     init {
         this.context = context
-        highlightDrawable = this.context.getDrawable(R.color.holo_blue_light)!!
+        //highlightDrawable = this.context.getDrawable(R.color.holo_blue_light)!!
     }
 }
