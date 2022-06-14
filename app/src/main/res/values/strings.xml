@@ -15,4 +15,5 @@
     <string name="error_empty_startTime">"please select start time "</string>
     <string name="error_empty_startDate">please select start date</string>
     <string name="title_add_event">Add Event</string>
+    <string name="save">Save</string>
 </resources>

@@ -157,7 +157,7 @@ class CalendarAddEventFragment : Fragment() {
         }
 
         //save
-        binding.saveButton.setOnClickListener {
+        binding.save.setOnClickListener {
             closeKeyboard()
             if (checkTitleNotEmpty() && checkStartTimeNotEmpty() && checkStartDateNotEmpty()) {
                 val title = binding.titleEdit.text.toString().trim()
@@ -182,7 +182,7 @@ class CalendarAddEventFragment : Fragment() {
                     endTime,
                     description
                 )
-//                clearValues()
+                clearValues()
 
             }
 
@@ -199,6 +199,18 @@ class CalendarAddEventFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun clearValues() {
+//        binding.titleEdit.setText("")
+//        binding.placeEdit.setText("")
+//        binding.startDateEdit.setText("")
+//        binding.startTimeEdit.setText("")
+//        binding.endDateEdit.setText("")
+//        binding.endTimeEdit.setText("")
+//        binding.detailEdit.setText("")
+        findNavController().navigate(R.id.action_calendarAddEventFragment_to_calendarMainFragment)
+
     }
 
     // closes the keyboard after clicking on save

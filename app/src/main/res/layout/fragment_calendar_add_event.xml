@@ -15,7 +15,21 @@
             android:background="@color/main_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:src="@drawable/ic_save"
+               android:layout_gravity="right"
+                android:background="@color/main_color"
+                android:layout_marginEnd="16dp"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
 
         <EditText
             android:id="@+id/titleEdit"
@@ -128,28 +142,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/endDateEdit" />
 
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:background="@color/secondary_color"
-            android:text="Save"
-            android:textColor="@color/main_text_color"
-            app:layout_constraintBaseline_toBaselineOf="@+id/deleteButton"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/saveButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:background="@color/secondary_color"-->
+<!--            android:text="Save"-->
+<!--            android:textColor="@color/main_text_color"-->
+<!--            app:layout_constraintBaseline_toBaselineOf="@+id/deleteButton"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="252dp"
-            android:background="@color/secondary_color"
-            android:text="Delete"
-            android:textColor="@color/main_text_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/deleteButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:layout_marginBottom="252dp"-->
+<!--            android:background="@color/secondary_color"-->
+<!--            android:text="Delete"-->
+<!--            android:textColor="@color/main_text_color"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" />-->
 
         <ImageButton
             android:id="@+id/mapButton"
@@ -159,6 +173,8 @@
             app:layout_constraintStart_toEndOf="@+id/placeEdit"
             app:layout_constraintTop_toTopOf="@+id/placeEdit"
             app:srcCompat="@drawable/ic_location_on" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
