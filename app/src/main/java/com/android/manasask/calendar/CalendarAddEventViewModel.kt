@@ -8,7 +8,7 @@ import timber.log.Timber
 import java.sql.SQLException
 import java.util.*
 
-class CalendarAddEventViewModel(private val database: EventDatabase):ViewModel() {
+class CalendarAddEventViewModel(private val database: EventDatabase) : ViewModel() {
 
     private var _eventAdded = MutableLiveData(false)
     val eventAdded: LiveData<Boolean>
@@ -18,10 +18,12 @@ class CalendarAddEventViewModel(private val database: EventDatabase):ViewModel()
      * insert the [Event] which created based on user selection
      * @exception SQLException logs any insertion to database fails
      */
-    fun insertItem(tile: String, location: String, startdate: Date,startTime:String,
-    endDate:Date,endTime:String,description:String) {
+    fun insertItem(
+        tile: String, location: String, startdate: Date, startTime: String,
+        endDate: Date, endTime: String, description: String
+    ) {
         val databaseEventItem = Event(
-             eventTitle= tile,
+            eventTitle = tile,
             eventLocation = location,
             eventStartDate = startdate,
             eventStartTime = startTime,
@@ -55,7 +57,8 @@ class CalendarAddEventViewModel(private val database: EventDatabase):ViewModel()
  * @param[database] takes [EventDatabase]
  * @throws ClassNotFoundException
  */
-class CalendarAddEventViewModelFactory(private val database: EventDatabase) : ViewModelProvider.Factory {
+class CalendarAddEventViewModelFactory(private val database: EventDatabase) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CalendarAddEventViewModel::class.java)) {
             return CalendarAddEventViewModel(database) as T

@@ -9,28 +9,28 @@ import java.util.*
 data class Event(
 
     @PrimaryKey(autoGenerate = true)
-    var eventId : Int=0,
+    var eventId: Int = 0,
 
     @ColumnInfo(name = "event_title")
-    var eventTitle : String,
+    var eventTitle: String,
 
     @ColumnInfo(name = "event_location")
-    var eventLocation : String,
+    var eventLocation: String,
 
     @ColumnInfo(name = "start_date")
-    var  eventStartDate: Date ,
+    var eventStartDate: Date,
 
     @ColumnInfo(name = "start_time")
-    var  eventStartTime: String ,
+    var eventStartTime: String,
 
     @ColumnInfo(name = "end_date")
-    var  eventEndDate: Date ,
+    var eventEndDate: Date,
 
     @ColumnInfo(name = "end_time")
-    var  eventEndTime: String ,
+    var eventEndTime: String,
 
     @ColumnInfo(name = "event_description")
-    var  eventDesscription: String
+    var eventDesscription: String
 
 
 )

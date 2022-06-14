@@ -24,20 +24,19 @@ class CalendarMainViewModel(private val applicationContext: Application) :
 
     init {
         Timber.d("initializing main viewmodel")
-      loadEventDatabase(Date())
+        loadEventDatabase(Date())
     }
 
-    fun setEventDate(date:Date)
-    {
+    fun setEventDate(date: Date) {
         loadEventDatabase(date)
     }
 
-    private fun loadEventDatabase(date:Date) {
+    private fun loadEventDatabase(date: Date) {
         viewModelScope.launch {
             launch(Dispatchers.IO) {
                 database.eventDatabaseDao.getEvents(date)
                     .collect {
-                        Log.d("Manasa list",it.toString())
+                        Log.d("Manasa list", it.toString())
                         Timber.d("eventList ${it}")
                         _eventList.postValue(it)
                     }

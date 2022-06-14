@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -15,8 +14,8 @@
         <!--    main layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:animateLayoutChanges="true"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:background="@color/secondary_color">
 
             <!--    toolbar -->
@@ -85,8 +84,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/main_color"
                 android:elevation="1dp"
-                app:mcv_dateTextAppearance="@style/CalendarDateAppearance"
                 app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
+                app:mcv_dateTextAppearance="@style/CalendarDateAppearance"
                 app:mcv_firstDayOfWeek="monday"
                 app:mcv_showOtherDates="defaults" />
             <!--            <DatePicker-->
@@ -110,31 +109,31 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_add" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_calendar"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:background="@color/secondary_color"
-                        android:overScrollMode="never"
-                        android:scrollbars="none"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/calendar_view"
-                        tools:listitem="@layout/event_item" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/secondary_color"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendar_view"
+                tools:listitem="@layout/event_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--        navigation -->
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--            android:id="@+id/nv"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="start"-->
-<!--            android:layout_marginEnd="50dp"-->
-<!--            android:background="@color/main_color"-->
-<!--            app:headerLayout="@layout/nav_header"-->
-<!--            app:itemTextAppearance="@style/NavTextAppearance"-->
-<!--            app:menu="@menu/drawer_menu" />-->
+        <!--        <com.google.android.material.navigation.NavigationView-->
+        <!--            android:id="@+id/nv"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_gravity="start"-->
+        <!--            android:layout_marginEnd="50dp"-->
+        <!--            android:background="@color/main_color"-->
+        <!--            app:headerLayout="@layout/nav_header"-->
+        <!--            app:itemTextAppearance="@style/NavTextAppearance"-->
+        <!--            app:menu="@menu/drawer_menu" />-->
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

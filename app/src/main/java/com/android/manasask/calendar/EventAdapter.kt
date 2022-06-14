@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.manasask.calendar.databinding.EventItemBinding
 
-class EventAdapter: ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffUtil()) {
+class EventAdapter : ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffUtil()) {
 
     class EventViewHolder constructor(val binding: EventItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -20,7 +20,7 @@ class EventAdapter: ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffUt
         }
 
         fun bind(item: Event) {
-            binding.eachEvent=item
+            binding.eachEvent = item
             binding.executePendingBindings()
         }
     }
@@ -33,7 +33,7 @@ class EventAdapter: ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffUt
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-       holder.bind(getItem(position))
+        holder.bind(getItem(position))
     }
 
 }

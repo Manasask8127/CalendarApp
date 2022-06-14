@@ -10,7 +10,7 @@ object Utils {
         return fullSdf.format(getDate(cDay))
     }
 
-     fun getDate(cDay: CalendarDay): Date {
+    fun getDate(cDay: CalendarDay): Date {
         val calendar = Calendar.getInstance()
         calendar.set(cDay.year, cDay.month - 1, cDay.day)
         return calendar.time

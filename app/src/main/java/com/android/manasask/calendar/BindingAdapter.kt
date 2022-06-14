@@ -15,15 +15,15 @@ import java.util.*
 @BindingAdapter("startText")
 fun bindStartText(textView: TextView, event: Event) {
 
-    textView.text = (SimpleDateFormat("MM/dd/yyyy").format(event.eventStartDate))+event.eventStartTime
+    textView.text =
+        (SimpleDateFormat("MM/dd/yyyy").format(event.eventStartDate)) + event.eventStartTime
 }
-
 
 
 @SuppressLint("SimpleDateFormat")
 @BindingAdapter("endText")
 fun bindEndText(textView: TextView, event: Event) {
-    val date= Date(event.eventEndDate.time-(24*60*60*1000))
-   // date.
-    textView.text = (SimpleDateFormat("MM/dd/yyyy").format(date))+event.eventEndTime
+    val date = Date(event.eventEndDate.time - (24 * 60 * 60 * 1000))
+    // date.
+    textView.text = (SimpleDateFormat("MM/dd/yyyy").format(date)) + event.eventEndTime
 }
