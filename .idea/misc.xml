@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/calendar_date_color.xml" value="0.1814814814814815" />
+        <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/ic_calendar_today.xml" value="0.2203125" />
+        <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/ic_calendar_week.xml" value="0.2203125" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/drawable/ic_crop_square.xml" value="0.1109375" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Kotlin Projects 2/Calendar/app/src/main/res/layout/event_item.xml" value="0.25" />

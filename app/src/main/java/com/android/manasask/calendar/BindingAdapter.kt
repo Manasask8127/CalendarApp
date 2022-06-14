@@ -16,7 +16,7 @@ import java.util.*
 fun bindStartText(textView: TextView, event: Event) {
 
     textView.text =
-        (SimpleDateFormat("MM/dd/yyyy").format(event.eventStartDate)) + event.eventStartTime
+        (SimpleDateFormat("MM/dd/yyyy").format(event.eventStartDate)) +" "+ event.eventStartTime
 }
 
 
@@ -25,5 +25,5 @@ fun bindStartText(textView: TextView, event: Event) {
 fun bindEndText(textView: TextView, event: Event) {
     val date = Date(event.eventEndDate.time - (24 * 60 * 60 * 1000))
     // date.
-    textView.text = (SimpleDateFormat("MM/dd/yyyy").format(date)) + event.eventEndTime
+    textView.text = (SimpleDateFormat("MM/dd/yyyy").format(date)) +" "+ event.eventEndTime
 }
