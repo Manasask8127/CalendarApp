@@ -37,6 +37,7 @@ class CalendarMainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentCalendarMainBinding>(
             inflater,
@@ -53,9 +54,7 @@ class CalendarMainFragment : Fragment() {
 
         binding.apply {
             //Calendar view
-            // calendarView.isDynamicHeightEnabled=true
             calendarView.addDecorator(CurrentDateDecorator(requireContext()))
-            // calendarView.selectedDate= CalendarDay.today()
 
 
             //sets to current date
@@ -70,8 +69,6 @@ class CalendarMainFragment : Fragment() {
             }
 
             calendarView.setOnMonthChangedListener { _, date ->
-                //calendarView.selectedDate = date
-                //date.
                 calendarMainViewModel.setEventDate(getDate(date))
             }
 

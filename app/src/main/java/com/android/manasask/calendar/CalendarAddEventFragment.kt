@@ -47,7 +47,7 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+const val REQUEST_CODE=400
 /**
  * A simple [Fragment] subclass.
  * Use the [CalendarAddEventFragment.newInstance] factory method to
@@ -63,8 +63,8 @@ class CalendarAddEventFragment : Fragment() {
     private lateinit var sDate: Date
     private lateinit var eDate: Date
 
-    private lateinit var notificationTime:Date
-
+    lateinit var notificationTime:Date
+    private lateinit var notificationEndTime:Date
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,7 +81,7 @@ class CalendarAddEventFragment : Fragment() {
 
         // Instantiating viewmodel using factory class
         val calendarAddItemViewModelProvider =
-            CalendarAddEventViewModelFactory(getDatabase(requireActivity().application))
+            CalendarAddEventViewModelFactory(getDatabase(requireActivity().application),requireContext())
         viewModel = ViewModelProvider(
             this@CalendarAddEventFragment,
             calendarAddItemViewModelProvider
@@ -98,6 +98,7 @@ class CalendarAddEventFragment : Fragment() {
         //Start date
         val startDateListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+
                 calendar.set(p1, p2, p3)
                 binding.startDateEdit.text =
                     SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
@@ -128,8 +129,6 @@ class CalendarAddEventFragment : Fragment() {
                     SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
                 calendar.add(Calendar.DATE, 1)
                 eDate = calendar.time
-                // Log.d("Manasa")
-                //1655528975439
             }
         }
 
@@ -167,7 +166,8 @@ class CalendarAddEventFragment : Fragment() {
         //End time
         val endTimeListener = object : TimePickerDialog.OnTimeSetListener {
             override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
-                calendar.set(0, 0, 0, p1, p2)
+                calendar.set(eDate.year, eDate.month, eDate.date, p1, p2)
+                notificationEndTime=calendar.time
                 binding.endTimeEdit.text =
                     SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
             }
@@ -184,15 +184,15 @@ class CalendarAddEventFragment : Fragment() {
         binding.save.setOnClickListener {
             closeKeyboard()
             if (checkTitleNotEmpty() && checkStartTimeNotEmpty() && checkStartDateNotEmpty()) {
-                val title = binding.titleEdit.text.toString().trim()
-                val location = binding.placeEdit.text.toString().trim()
+                val title = binding.title.text.toString().trim()
+                val location = binding.place.text.toString().trim()
                 val startDate = sDate
                 //java.sql.Date.valueOf(binding.startDateEdit.text.toString().trim())
                 val startTime = binding.startTimeEdit.text.toString().trim()
                 val endDate = eDate
                 //java.sql.Date.valueOf(binding.endDateEdit.text.toString().trim())
                 val endTime = binding.endTimeEdit.text.toString().trim()
-                val description = binding.detailEdit.text.toString().trim()
+                val description = binding.detail.text.toString().trim()
                 Timber.d(
                     "title: $title, location:$location, startDate:$startDate,startTime:$startTime" +
                             " endDate:$endDate, endTime:$endTime,description:$description"
@@ -206,8 +206,9 @@ class CalendarAddEventFragment : Fragment() {
                     endTime,
                     description
                 )
+                viewModel.updateCurrentTime(notificationTime.time)
                 clearValues()
-                getDateScheduleNotification()
+                //getDateScheduleNotification()
 
 
             }
@@ -217,7 +218,6 @@ class CalendarAddEventFragment : Fragment() {
         viewModel.eventAdded.observe(viewLifecycleOwner) { itemAdded ->
             if (itemAdded) {
                 Toast.makeText(requireContext(), "Item Added", Toast.LENGTH_LONG).show()
-
                 viewModel.clearItemAdded(false)
             }
 
@@ -240,14 +240,16 @@ class CalendarAddEventFragment : Fragment() {
 
     private fun getDateScheduleNotification() {
         val intent = Intent(requireContext(), AlarmReceiver::class.java)
-        val title = binding.titleEdit.text.toString()
-        val message = binding.detailEdit.text.toString()
+        val title = binding.title.text.toString()
+        val message = binding.detail.text.toString()
         intent.putExtra(titleExtra, title)
         intent.putExtra(messageExtra, message)
+        intent.putExtra("requestCode", REQUEST_CODE)
+        intent.putExtra("notificationID",getTime())
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
-            notificationID,
+            REQUEST_CODE,
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
@@ -286,8 +288,8 @@ class CalendarAddEventFragment : Fragment() {
 
     // checks if entered title is not empty before saving
     private fun checkTitleNotEmpty(): Boolean {
-        binding.titleEdit.text.let {
-            return if (binding.titleEdit.text?.isEmpty() == true) {
+        binding.title.text.let {
+            return if (binding.title.text?.isEmpty() == true) {
                 binding.titleEdit.error = getString(R.string.error_empty_title)
                 false
             } else

@@ -30,53 +30,99 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
 
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/titleEdit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:ems="10"
-            android:hint="Title"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_app_bar" />
+            app:layout_constraintTop_toBottomOf="@id/top_app_bar">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <EditText-->
+<!--            android:id="@+id/titleEdit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Title"-->
+<!--            android:inputType="textPersonName"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/top_app_bar" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/placeEdit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:paddingHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:ems="10"
-            android:hint="Place"
+            android:layout_marginStart="16dp"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/titleEdit">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/place"
+                />
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--        <EditText-->
+<!--            android:id="@+id/placeEdit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Place"-->
+<!--            android:inputType="textPersonName"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/titleEdit" />-->
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Start Time:"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:text="Start :"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/placeEdit" />
+
 
         <TextView
             android:id="@+id/startDateEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="Date"
             android:inputType="date"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/startTimeEdit"
@@ -87,6 +133,7 @@
             android:hint="Time"
             android:inputType="time"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/startDateEdit"
             app:layout_constraintTop_toTopOf="@+id/startDateEdit" />
 
@@ -94,9 +141,9 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="End Time"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:text="End :"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/startDateEdit" />
 
@@ -104,8 +151,8 @@
             android:id="@+id/endDateEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="Date"
             android:inputType="date"
@@ -125,20 +172,40 @@
             app:layout_constraintStart_toEndOf="@+id/endDateEdit"
             app:layout_constraintTop_toTopOf="@+id/endDateEdit" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailEdit"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Detail"
+            android:paddingHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:inputType="textMultiLine"
+            android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/endDateEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/endDateEdit">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/detail" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+<!--        <EditText-->
+<!--            android:id="@+id/detailEdit"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:ems="10"-->
+<!--            android:gravity="start|top"-->
+<!--            android:hint="Detail"-->
+<!--            android:inputType="textMultiLine"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/endDateEdit" />-->
 
 <!--        <Button-->
 <!--            android:id="@+id/saveButton"-->
