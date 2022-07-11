@@ -1,10 +1,11 @@
-package com.android.manasask.calendar
+package com.android.manasask.calendar.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.android.manasask.calendar.Converters
 
 @Database(entities = [Event::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)

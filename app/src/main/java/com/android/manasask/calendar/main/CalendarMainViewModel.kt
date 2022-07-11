@@ -1,4 +1,4 @@
-package com.android.manasask.calendar
+package com.android.manasask.calendar.main
 
 import android.app.Application
 import android.util.Log
@@ -6,12 +6,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.android.manasask.calendar.database.Event
+import com.android.manasask.calendar.database.getDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarMainViewModel(private val applicationContext: Application) :

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/calendarMainFragment"
-        android:name="com.android.manasask.calendar.CalendarMainFragment"
+        android:name="com.android.manasask.calendar.main.CalendarMainFragment"
         android:label="CalendarMainFragment"
         tools:layout="@layout/fragment_calendar_main">
         <action
@@ -17,12 +17,13 @@
     </fragment>
     <fragment
         android:id="@+id/calendarAddEventFragment"
-        android:name="com.android.manasask.calendar.CalendarAddEventFragment"
+        android:name="com.android.manasask.calendar.addtask.CalendarAddEventFragment"
         android:label="Add Event"
         tools:layout="@layout/fragment_calendar_add_event">
         <action
             android:id="@+id/action_calendarAddEventFragment_to_calendarMainFragment"
             app:destination="@id/calendarMainFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/calendarMainFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.android.manasask.calendar.database.Event
 import com.android.manasask.calendar.databinding.EventItemBinding
 
 class EventAdapter : ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffUtil()) {

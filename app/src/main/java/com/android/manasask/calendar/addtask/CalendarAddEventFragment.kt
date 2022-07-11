@@ -1,4 +1,4 @@
-package com.android.manasask.calendar
+package com.android.manasask.calendar.addtask
 
 import android.app.*
 import android.content.Context
@@ -15,33 +15,20 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.OnConflictStrategy.REPLACE
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import com.android.manasask.calendar.NotifyWork.Companion.NOTIFICATION_ID
-import com.android.manasask.calendar.NotifyWork.Companion.NOTIFICATION_WORK
+import com.android.manasask.calendar.*
+import com.android.manasask.calendar.R.*
+import com.android.manasask.calendar.database.getDatabase
 import com.android.manasask.calendar.databinding.FragmentCalendarAddEventBinding
-import com.android.manasask.calendar.databinding.FragmentCalendarMainBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.*
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import timber.log.Timber
-import java.lang.System.currentTimeMillis
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.Locale.getDefault
-import kotlin.time.DurationUnit
-import java.util.concurrent.TimeUnit.MILLISECONDS
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,7 +60,7 @@ class CalendarAddEventFragment : Fragment() {
         // return inflater.inflate(R.layout.fragment_calendar_add_event, container, false)
         binding = DataBindingUtil.inflate<FragmentCalendarAddEventBinding>(
             inflater,
-            R.layout.fragment_calendar_add_event,
+            layout.fragment_calendar_add_event,
             container,
             false
         )
@@ -187,7 +174,7 @@ class CalendarAddEventFragment : Fragment() {
                 val title = binding.title.text.toString().trim()
                 val location = binding.place.text.toString().trim()
                 val startDate = sDate
-                //java.sql.Date.valueOf(binding.startDateEdit.text.toString().trim())
+                  //java.sql.Date.valueOf(binding.startDateEdit.text.toString().trim())
                 val startTime = binding.startTimeEdit.text.toString().trim()
                 val endDate = eDate
                 //java.sql.Date.valueOf(binding.endDateEdit.text.toString().trim())
@@ -290,7 +277,7 @@ class CalendarAddEventFragment : Fragment() {
     private fun checkTitleNotEmpty(): Boolean {
         binding.title.text.let {
             return if (binding.title.text?.isEmpty() == true) {
-                binding.titleEdit.error = getString(R.string.error_empty_title)
+                binding.titleEdit.error = getString(string.error_empty_title)
                 false
             } else
                 true
@@ -302,7 +289,7 @@ class CalendarAddEventFragment : Fragment() {
     private fun checkStartTimeNotEmpty(): Boolean {
         binding.startTimeEdit.text.let {
             return if (binding.startTimeEdit.text?.isEmpty() == true) {
-                binding.startTimeEdit.error = getString(R.string.error_empty_startTime)
+                binding.startTimeEdit.error = getString(string.error_empty_startTime)
                 false
             } else
                 true
@@ -313,7 +300,7 @@ class CalendarAddEventFragment : Fragment() {
     private fun checkStartDateNotEmpty(): Boolean {
         binding.startDateEdit.text.let {
             return if (binding.startDateEdit.text?.isEmpty() == true) {
-                binding.startDateEdit.error = getString(R.string.error_empty_startDate)
+                binding.startDateEdit.error = getString(string.error_empty_startDate)
                 false
             } else
                 true

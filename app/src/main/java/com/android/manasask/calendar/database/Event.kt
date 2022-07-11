@@ -1,4 +1,4 @@
-package com.android.manasask.calendar
+package com.android.manasask.calendar.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

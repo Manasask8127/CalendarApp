@@ -3,6 +3,7 @@ package com.android.manasask.calendar
 import android.annotation.SuppressLint
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.android.manasask.calendar.database.Event
 import java.text.SimpleDateFormat
 import java.util.*
 

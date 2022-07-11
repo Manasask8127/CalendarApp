@@ -15,6 +15,5 @@ object Utils {
         calendar.set(cDay.year, cDay.month - 1, cDay.day)
         return calendar.time
     }
-
     fun upperFirst(str: String) = str.substring(0, 1).uppercase() + str.substring(1)
 }
