@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.android.manasask.calendar.MainActivity
 import com.android.manasask.calendar.R
 import com.android.manasask.calendar.addtask.REQUEST_CODE
+import timber.log.Timber
 import java.lang.Math.random
 import kotlin.random.Random
 import kotlin.random.Random.Default.nextInt
@@ -24,9 +25,9 @@ const val FLAGS = 0
 class AlarmReceiver : BroadcastReceiver() {
 
 
-
-    @SuppressLint("WrongConstant")
     override fun onReceive(context: Context?, intent: Intent?) {
+
+        Timber.d("AlarmReceiver invoked")
 
         // Create an explicit intent for an Activity in your app
         val cancelIntent = Intent(context, MainActivity::class.java).apply {
@@ -51,12 +52,10 @@ class AlarmReceiver : BroadcastReceiver() {
                     .setContentTitle(intent?.getStringExtra(titleExtra))
                     .setContentText(intent?.getStringExtra(messageExtra))
                     .setContentIntent(pendingIntent)
-                    .setAutoCancel(true)
-                    .addAction(
-                        R.drawable.ic_calendar_day,
+                    .addAction(R.drawable.ic_calendar_day,
                         context.getString(R.string.snooze),
-                        snoozePendingIntent
-                    )
+                        snoozePendingIntent)
+                    .setAutoCancel(true)
                     .build()
             }
 

@@ -88,9 +88,9 @@ class CalendarAddEventViewModel(private val database: EventDatabase, private val
                 intent,
                 PendingIntent.FLAG_IMMUTABLE
             )
-
+            Timber.d(Date(currentTime).toString())
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.setExact(
+            alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 currentTime,
                 pendingIntent
