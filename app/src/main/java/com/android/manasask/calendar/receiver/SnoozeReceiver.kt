@@ -1,4 +1,4 @@
-package com.android.manasask.calendar
+package com.android.manasask.calendar.receiver
 
 import android.app.AlarmManager
 import android.app.NotificationManager

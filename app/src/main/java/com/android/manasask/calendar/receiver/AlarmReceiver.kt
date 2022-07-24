@@ -1,4 +1,4 @@
-package com.android.manasask.calendar
+package com.android.manasask.calendar.receiver
 
 import android.annotation.SuppressLint
 import android.app.NotificationManager
@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.android.manasask.calendar.MainActivity
+import com.android.manasask.calendar.R
 import com.android.manasask.calendar.addtask.REQUEST_CODE
 import java.lang.Math.random
 import kotlin.random.Random
