@@ -1,5 +1,6 @@
 package com.android.manasask.calendar.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -33,6 +34,9 @@ class CalendarMainFragment : Fragment() {
     private val eventAdapter = EventAdapter()
     private lateinit var calendarMainViewModel: CalendarMainViewModel
 
+    private var addTaskToDate=CalendarDay.today()
+
+    @SuppressLint("TimberArgCount")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,20 +69,30 @@ class CalendarMainFragment : Fragment() {
             }
 
             floatingActionButton.setOnClickListener {
-                findNavController().navigate(CalendarMainFragmentDirections.actionCalendarMainFragmentToCalendarAddEventFragment())
+                findNavController().navigate(CalendarMainFragmentDirections.actionCalendarMainFragmentToCalendarAddEventFragment(addTaskToDate.day,addTaskToDate.month,addTaskToDate.year))
+                Timber.d("${addTaskToDate.day} ${addTaskToDate.month} ${addTaskToDate.year}")
             }
 
             calendarView.setOnMonthChangedListener { _, date ->
+                Log.d("current month","${date.month} ${CalendarDay.today().month}")
+                if(date.month==CalendarDay.today().month)
+                    calendarMainViewModel.setEventDate(getDate(CalendarDay.today()))
+                else
                 calendarMainViewModel.setEventDate(getDate(date))
             }
 
             calendarView.setOnDateChangedListener { _, date, _ ->
                 Timber.d("on date change ${date}")
                 // Toast.makeText(requireContext(),"date is ${date}",Toast.LENGTH_SHORT).show()
+                addTaskToDate=date
                 calendarMainViewModel.setEventDate(getDate(date))
 
             }
+
+
         }
+
+
 
 
 

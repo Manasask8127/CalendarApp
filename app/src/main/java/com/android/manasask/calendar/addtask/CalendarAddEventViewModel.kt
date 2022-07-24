@@ -83,16 +83,16 @@ class CalendarAddEventViewModel(private val database: EventDatabase, private val
                 context,
                 id.toInt(),
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_IMMUTABLE
             )
 
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.setRepeating(
+            alarmManager.setExact(
                 AlarmManager.RTC_WAKEUP,
                 currentTime,
-                60 * 5 * 1000,
                 pendingIntent
             )
+
 
         }
 

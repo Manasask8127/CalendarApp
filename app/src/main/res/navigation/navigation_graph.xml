@@ -25,5 +25,24 @@
             app:destination="@id/calendarMainFragment"
             app:popUpTo="@id/calendarMainFragment"
             app:popUpToInclusive="false" />
+        <argument
+            android:name="day"
+            app:argType="integer" />
+        <argument
+            android:name="month"
+            app:argType="integer" />
+        <argument
+            android:name="year"
+            app:argType="integer" />
+        <!--        <argument-->
+<!--            android:name="currentDate"-->
+<!--            app:argType="Integer" />-->
+<!--        <argument-->
+<!--            android:name="currentMonth"-->
+<!--            app:argType="Integer" />-->
+<!--        <argument-->
+<!--            android:name="currentYear"-->
+<!--            app:argType="Integer" />-->
+
     </fragment>
 </navigation>

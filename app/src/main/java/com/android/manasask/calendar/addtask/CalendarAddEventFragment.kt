@@ -4,6 +4,7 @@ import android.app.*
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -29,23 +30,26 @@ import com.google.android.material.snackbar.Snackbar.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 const val REQUEST_CODE=400
-/**
- * A simple [Fragment] subclass.
- * Use the [CalendarAddEventFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class CalendarAddEventFragment : Fragment() {
 
     private lateinit var viewModel: CalendarAddEventViewModel
     private lateinit var binding: FragmentCalendarAddEventBinding
+    var startCalendar = Calendar.getInstance()
+    var endCalendar = Calendar.getInstance()
+    var stCalendar = Calendar.getInstance()
+    var etCalendar = Calendar.getInstance()
     var calendar = Calendar.getInstance()
+
     val pickerDate = Calendar.getInstance()
+
+    private var eventDay by Delegates.notNull<Int>()
+    private var eventMonth by Delegates.notNull<Int>()
+    private var eventYear by Delegates.notNull<Int>()
+
 
     private lateinit var sDate: Date
     private lateinit var eDate: Date
@@ -76,76 +80,90 @@ class CalendarAddEventFragment : Fragment() {
 
         // Creating toolbar
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.topAppBar)
-        // binding.topAppBar.title = getString(R.string.title_add_event)
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.topAppBar.setupWithNavController(findNavController(), appBarConfiguration)
+
+        val arg=CalendarAddEventFragmentArgs.fromBundle(requireArguments())
+        eventDay=arg.day
+        eventMonth=arg.month
+        eventYear=arg.year
+
+        Timber.d("${arg.day} ${arg.month} ${arg.year}")
+
+        calendar.set(eventYear,eventMonth-1,eventDay)
+        binding.startDateEdit.text =
+            SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
+        binding.endDateEdit.text =
+            SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
+        sDate = calendar.time
+        eDate=calendar.time
+        //continue from here...
 
         createNotificationChannel()
 
         //Start date
         val startDateListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-
-                calendar.set(p1, p2, p3)
+                startCalendar.set(p1, p2, p3)
                 binding.startDateEdit.text =
-                    SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
+                    SimpleDateFormat("MM/dd/yyyy", Locale.US).format(startCalendar.time)
                 binding.endDateEdit.text =
-                    SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
-                sDate = calendar.time
-                eDate=calendar.time
+                    SimpleDateFormat("MM/dd/yyyy", Locale.US).format(startCalendar.time)
+                sDate = startCalendar.time
+                eDate=startCalendar.time
             }
         }
 
         binding.startDateEdit.setOnClickListener {
             DatePickerDialog(
-                requireContext(), startDateListener, calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
+                requireContext(), startDateListener, startCalendar.get(Calendar.YEAR),
+                startCalendar.get(Calendar.MONTH),
+                startCalendar.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
 
         //End Date
         val endDateListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-                calendar.set(p1, p2, p3)
+                endCalendar.set(p1, p2, p3)
 
                 //binding.startDateEdit.text=SimpleDateFormat("MM/dd/yyyy",Locale.US).format(calendar.time)
                 //Toast.makeText(requireContext(),"calendar time ${calendar.time}",Toast.LENGTH_SHORT).show()
                 Log.d("Manasa", "endDate: ${calendar.time.time}")
                 binding.endDateEdit.text =
-                    SimpleDateFormat("MM/dd/yyyy", Locale.US).format(calendar.time)
-                calendar.add(Calendar.DATE, 1)
-                eDate = calendar.time
+                    SimpleDateFormat("MM/dd/yyyy", Locale.US).format(endCalendar.time)
+                endCalendar.add(Calendar.DATE, 1)
+                eDate = endCalendar.time
             }
         }
 
         binding.endDateEdit.setOnClickListener {
             DatePickerDialog(
-                requireContext(), endDateListener, calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
+                requireContext(), endDateListener, endCalendar.get(Calendar.YEAR),
+                endCalendar.get(Calendar.MONTH),
+                endCalendar.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
 
         //Start Time
         val startTimeListener = object : TimePickerDialog.OnTimeSetListener {
             override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
-                calendar.set(sDate.year+1900, sDate.month,sDate.date , p1, p2)
+                stCalendar.set(sDate.year+1900, sDate.month,sDate.date , p1, p2)
                 binding.startTimeEdit.text =
-                    SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
-                Log.d("Manasa"," notification time ${sDate} and ${calendar.time} and  ${sDate.year} ${sDate.month} ${sDate.date}")
-                notificationTime=calendar.time
-                calendar.set(0, 0, 0, p1 + 1, p2)
+                    SimpleDateFormat("HH:mm", Locale.US).format(stCalendar.time)
+               // Log.d("Manasa"," notification time ${sDate} and ${calendar.time} and  ${sDate.year} ${sDate.month} ${sDate.date}")
+                notificationTime=stCalendar.time
+                stCalendar.set(0, 0, 0, p1 + 1, p2)
                 binding.endTimeEdit.text =
-                    SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
+                    SimpleDateFormat("HH:mm", Locale.US).format(stCalendar.time)
 
             }
         }
 
         binding.startTimeEdit.setOnClickListener {
             TimePickerDialog(
-                requireContext(), startTimeListener, calendar.get(Calendar.HOUR),
-                calendar.get(Calendar.MINUTE), true
+                requireContext(), startTimeListener, stCalendar.get(Calendar.HOUR),
+                stCalendar.get(Calendar.MINUTE), true
             ).show()
         }
 
@@ -153,17 +171,17 @@ class CalendarAddEventFragment : Fragment() {
         //End time
         val endTimeListener = object : TimePickerDialog.OnTimeSetListener {
             override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
-                calendar.set(eDate.year, eDate.month, eDate.date, p1, p2)
-                notificationEndTime=calendar.time
+                etCalendar.set(eDate.year, eDate.month, eDate.date, p1, p2)
+                notificationEndTime=etCalendar.time
                 binding.endTimeEdit.text =
-                    SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
+                    SimpleDateFormat("HH:mm", Locale.US).format(etCalendar.time)
             }
         }
 
         binding.endTimeEdit.setOnClickListener {
             TimePickerDialog(
-                requireContext(), endTimeListener, calendar.get(Calendar.HOUR),
-                calendar.get(Calendar.MINUTE), true
+                requireContext(), endTimeListener, etCalendar.get(Calendar.HOUR),
+                etCalendar.get(Calendar.MINUTE), true
             ).show()
         }
 
@@ -220,38 +238,15 @@ class CalendarAddEventFragment : Fragment() {
         val desc = "A Description of the Channel"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel(channelID, name, importance)
+            .apply { setShowBadge(false) }
+        channel.enableLights(true)
+        channel.lightColor = Color.RED
+        channel.enableVibration(true)
         channel.description = desc
         val notificationManager = requireContext().getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
 
-    private fun getDateScheduleNotification() {
-        val intent = Intent(requireContext(), AlarmReceiver::class.java)
-        val title = binding.title.text.toString()
-        val message = binding.detail.text.toString()
-        intent.putExtra(titleExtra, title)
-        intent.putExtra(messageExtra, message)
-        intent.putExtra("requestCode", REQUEST_CODE)
-        intent.putExtra("notificationID",getTime())
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(),
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val time = getTime()
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            time,
-            60*5*1000
-            ,
-            pendingIntent
-        )
-
-    }
 
     private fun getTime(): Long {
         return notificationTime.time

@@ -18,7 +18,7 @@ interface EventDatabaseDao {
     fun get(key: Long): Event
 
     @Query("SELECT * FROM EVENT_TABLE ORDER BY eventId DESC")
-    fun getAllEvents(): LiveData<List<Event>>
+    fun getAllEvents(): Flow<List<Event>>
 
     @Query("SELECT * FROM EVENT_TABLE WHERE :date>=start_date AND :date<=end_date ORDER BY start_date ASC")
     fun getEvents(date: Date): Flow<List<Event>>

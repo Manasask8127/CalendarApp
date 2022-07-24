@@ -22,9 +22,12 @@ class CalendarMainViewModel(private val applicationContext: Application) :
     val eventList: LiveData<List<Event>>
         get() = _eventList
 
+    private var allEvents= listOf<Event>()
+
     init {
         Timber.d("initializing main viewmodel")
         loadEventDatabase(Date())
+        allEvents()
     }
 
     fun setEventDate(date: Date) {
@@ -36,13 +39,27 @@ class CalendarMainViewModel(private val applicationContext: Application) :
             launch(Dispatchers.IO) {
                 database.eventDatabaseDao.getEvents(date)
                     .collect {
-                        Log.d("Manasa list", it.toString())
+                       // Log.d("Manasa list", it.toString())
                         Timber.d("eventList ${it}")
                         _eventList.postValue(it)
                     }
 
             }
         }
+    }
+
+    private fun allEvents(){
+        viewModelScope.launch {
+            launch(Dispatchers.IO){
+                database.eventDatabaseDao.getAllEvents().collect{
+                    allEvents=it
+                }
+            }
+        }
+    }
+
+    fun getAllEvents():List<Event>{
+        return allEvents
     }
 
 }
